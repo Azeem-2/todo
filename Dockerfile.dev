@@ -1,0 +1,21 @@
+FROM  python:3.12 AS builder
+
+WORKDIR /app
+
+COPY  . /app/
+
+RUN pip install poetry
+RUN poetry install
+
+RUN poetry config virtualenvs.create false
+
+EXPOSE 8000
+
+FROM alpine AS final
+
+WORKDIR /app
+
+COPY --from=builder /app /app
+
+CMD ["poetry", "run", "uvicorn", "todoapp.main:app", "--host", "]
+

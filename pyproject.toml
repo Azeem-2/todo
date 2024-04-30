@@ -1,0 +1,25 @@
+[tool.poetry]
+name = "todoapp"
+version = "0.1.0"
+description = ""
+authors = ["Azeem000011111111 <139073260+Azeem000011111111@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+fastapi = "^0.110.0"
+uvicorn = {extras = ["standard"], version = "^0.28.0"}
+mypy = "^1.9.0"
+sqlalchemy = "^2.0.28"
+psycopg2 = "^2.9.9"
+requests = "^2.31.0"
+streamlit = "^1.32.2"
+postgres = "^4.0"
+axios = "^0.4.0"
+pytest = "^8.1.1"
+psycopg2-binary = "^2.9.9"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
