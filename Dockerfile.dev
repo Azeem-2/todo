@@ -1,13 +1,21 @@
-FROM  python:3.12 AS builder
+
+# Make /tmp writable
+
+
+FROM python:3.12 AS builder
+
+VOLUME /tmp
 
 WORKDIR /app
 
-COPY  . /app/
+COPY . /app/
 
 RUN pip install poetry
+
 RUN poetry install
 
-RUN poetry config virtualenvs.create false
+# Install FastAPI explicitly in final stage (optional, can be added to poetry.toml)
+# RUN pip install fastapi
 
 EXPOSE 8000
 
@@ -15,7 +23,9 @@ FROM alpine AS final
 
 WORKDIR /app
 
-COPY --from=builder /app /app
+COPY --from=builder /app/ /app
 
-CMD ["poetry", "run", "uvicorn", "todoapp.main:app", "--host", ]
+# Optional: Install FastAPI again in final stage (if not installed in builder)
+# RUN pip install fastapi
 
+CMD ["uvicorn", "todoapp.main:app", "--host", "0.0.0.0"]
